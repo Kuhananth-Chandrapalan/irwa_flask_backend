@@ -7,7 +7,7 @@ import numpy as np
 import re
 import nltk
 from nltk.stem import WordNetLemmatizer
-from tensorflow.keras.models import load_model
+import tensorflow as tf
 
 from database import connect_to_mongodb
 
@@ -19,7 +19,7 @@ lemmatizer = WordNetLemmatizer()
 intents = json.loads(open('intents.json').read())
 words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
-model = load_model('chatbot_model.model')
+model = tf.saved_model.load('chatbot_model.model')
 
 # Clean up the user's sentence for processing
 def clean_up_sentence(sentence):
